@@ -1,0 +1,11 @@
+import org.drools.mapreduce.core.model.entry.Entry;
+import org.drools.mapreduce.core.model.entry.RunningReduce;
+
+rule "Reduce Transactions By Summation"
+ruleflow-group "reducer-rules"
+when
+	$runningReduce : RunningReduce()
+	$entry : Entry()
+then
+	$runningReduce.value = "" + (Double.parseDouble($runningReduce.value) + Double.parseDouble($entry.value));
+end

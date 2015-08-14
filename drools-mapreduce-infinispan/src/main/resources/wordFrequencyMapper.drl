@@ -1,0 +1,12 @@
+import org.drools.mapreduce.core.model.entry.Entry;
+
+global org.drools.mapreduce.core.api.Collector collector;
+
+rule "Split sentence"
+ruleflow-group "mapper-rules"
+when
+	$entry : Entry($key : key, $words : value.split(" "))
+then
+	for (String word : $words )
+	     collector.collect(word, "1");
+end
