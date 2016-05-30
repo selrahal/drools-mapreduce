@@ -7,17 +7,14 @@ import org.drools.mapreduce.core.api.Reducer;
 import org.drools.mapreduce.core.model.entry.Entry;
 import org.drools.mapreduce.core.model.entry.RunningReduce;
 import org.drools.mapreduce.core.util.DroolsHelper;
+import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
 public class DroolsReducer implements Reducer<String, String, String, String> {
-	private final String kieBase;
+	private final KieContainer kieContainer;
 
 	public DroolsReducer() {
-		this(null);
-	}
-
-	public DroolsReducer(String kieBase) {
-		this.kieBase = kieBase;
+		this.kieContainer = DroolsHelper.createClasspathKieContainer();
 	}
 
 	public void reduce(String key, Iterator<String> values,
@@ -33,12 +30,11 @@ public class DroolsReducer implements Reducer<String, String, String, String> {
 
 		while (values.hasNext()) {
 			String nextValue = values.next();
-			KieSession kieSession = DroolsHelper.createKieSession(this.kieBase);
+			KieSession kieSession = kieContainer.newKieSession();
 			kieSession.insert(runningReduce);
 			Entry entry = new Entry(key.toString(), nextValue.toString());
 			kieSession.insert(entry);
-			kieSession.getAgenda().getAgendaGroup("reducer-rules").setFocus();
-			kieSession.fireAllRules();
+			DroolsHelper.fireAgendaGroup(kieSession, "reducer-rules");
 			kieSession.dispose();
 		}
 		
