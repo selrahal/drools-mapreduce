@@ -1,0 +1,10 @@
+import org.drools.mapreduce.java8.map.SingleValueCollector;
+
+rule "Reduce By Summation"
+ruleflow-group "reducer-rules"
+when
+	$runningReduce : SingleValueCollector()
+	$entry : Integer()
+then
+	$runningReduce.collect($entry + $runningReduce.get());
+end

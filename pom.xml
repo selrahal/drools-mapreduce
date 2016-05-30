@@ -11,6 +11,7 @@
 
 	<modules>
 		<module>drools-mapreduce-core</module>
+		<module>drools-mapreduce-java8</module>
 		<module>drools-mapreduce-infinispan</module>
 		<module>drools-mapreduce-hadoop</module>
 		<module>drools-mapreduce-hadoop-example</module>

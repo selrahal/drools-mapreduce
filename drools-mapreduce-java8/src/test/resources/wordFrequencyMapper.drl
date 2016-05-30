@@ -1,0 +1,11 @@
+import org.drools.mapreduce.core.model.entry.Entry;
+
+global org.drools.mapreduce.core.api.ValueCollector valueCollector;
+
+rule "Word Length"
+ruleflow-group "mapper-rules"
+when
+	$entry : String()
+then
+	valueCollector.collect($entry.length());
+end
