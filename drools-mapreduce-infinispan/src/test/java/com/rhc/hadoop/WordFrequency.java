@@ -2,7 +2,7 @@ package com.rhc.hadoop;
 
 import java.util.Map;
 
-import org.drools.mapreduce.infinispan.map.InfinispanDroolsMapper;
+import org.drools.mapreduce.infinispan.map.InfinispanDroolsStringMapper;
 import org.drools.mapreduce.infinispan.reduce.InfinispanDroolsReducer;
 import org.infinispan.Cache;
 import org.infinispan.distexec.mapreduce.MapReduceTask;
@@ -31,7 +31,7 @@ public class WordFrequency {
 	 
 	      MapReduceTask<String, String, String, String> t =
 	         new MapReduceTask<String, String, String, String>(c1);
-	      t.mappedWith(new InfinispanDroolsMapper())
+	      t.mappedWith(new InfinispanDroolsStringMapper())
 	         .reducedWith(new InfinispanDroolsReducer());
 	      Map<String, String> wordCountMap = t.execute();
 	      System.out.println(wordCountMap);
