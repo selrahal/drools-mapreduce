@@ -1,6 +1,6 @@
 import org.drools.mapreduce.core.model.entry.Entry;
 
-global org.drools.mapreduce.core.api.ValueCollector valueCollector;
+global org.drools.mapreduce.java8.map.SingleIntegerValueCollector valueCollector;
 
 rule "Word Length"
 ruleflow-group "mapper-rules"

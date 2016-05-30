@@ -1,9 +1,9 @@
-import org.drools.mapreduce.java8.map.SingleValueCollector;
+import org.drools.mapreduce.java8.map.SingleIntegerValueCollector;
 
 rule "Reduce By Summation"
 ruleflow-group "reducer-rules"
 when
-	$runningReduce : SingleValueCollector()
+	$runningReduce : SingleIntegerValueCollector()
 	$entry : Integer()
 then
 	$runningReduce.collect($entry + $runningReduce.get());

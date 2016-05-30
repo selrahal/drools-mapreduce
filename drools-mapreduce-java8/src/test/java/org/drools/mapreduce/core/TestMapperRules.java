@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.drools.mapreduce.java8.map.StreamMapper;
+import org.drools.mapreduce.java8.map.StreamToIntegerMapper;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ public class TestMapperRules {
 		List<String> quotes = Arrays.asList("Haters", "gonna","hate","hate","hate","hate","hate",
 				"Got","nothing","in","my","brain",
 				"I","stay","out","too","late");
-		List<Integer> wordCounts = quotes.stream().map(new StreamMapper<String, Integer>()).collect(Collectors.toList());
+		List<Integer> wordCounts = quotes.stream().map(new StreamToIntegerMapper<String>()).collect(Collectors.toList());
 		
 		Assert.assertEquals(quotes.size(), wordCounts.size());
 		for (int index = 0; index < quotes.size(); index++) {
