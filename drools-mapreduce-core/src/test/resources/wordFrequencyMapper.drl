@@ -1,12 +1,12 @@
-import org.drools.mapreduce.core.model.entry.Entry;
-
-global org.drools.mapreduce.core.api.Collector collector;
+import org.drools.mapreduce.core.model.entry.StringEntry;
+import org.drools.mapreduce.core.collector.impl.StringCollector;
 
 rule "Split sentence"
 ruleflow-group "mapper-rules"
 when
-	$entry : Entry($key : key, $words : value.split(" "))
+	$collector : StringCollector()
+	$entry : StringEntry($key : key, $words : value.split(" "))
 then
 	for (String word : $words )
-	     collector.collect(word, "1");
+	     $collector.collect(word, "1");
 end

@@ -1,7 +1,8 @@
 package org.drools.mapreduce.core.api;
 
-import java.util.Iterator;
+import org.drools.mapreduce.core.collector.api.ValueCollector;
+import org.drools.mapreduce.core.model.entry.Entry;
 
-public interface Reducer<K2, V2, K3, V3> {
-	public void reduce(K2 key, Iterator<V2> values, Collector<K3, V3> output);
+public interface Reducer{
+	public void reduce(Entry entry, ValueCollector output);
 }
